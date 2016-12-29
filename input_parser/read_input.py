@@ -1,3 +1,6 @@
+__author__ = "Miriam Garcia Soto"
+__email__ = "miriam.garcia@imdea.org"
+
 import networkx as nx
 import numpy as np
 import ppl_functions as pplf
