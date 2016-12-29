@@ -1,3 +1,6 @@
+__author__ = "Miriam Garcia Soto"
+__email__ = "miriam.garcia@imdea.org"
+
 from sage.libs.ppl import *
 from fractions import Fraction
 
