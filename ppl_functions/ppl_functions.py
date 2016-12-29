@@ -1,3 +1,6 @@
+__author__ = "Miriam Garcia Soto"
+__email__ = "miriam.garcia@imdea.org"
+
 from sage.all_cmdline import *
 from sage.libs.ppl import *
 
