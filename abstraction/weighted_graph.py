@@ -7,9 +7,10 @@ import sys
 
 #----------------------------------------------------------------------------------------------#
 def set_nodes(WG,G,E):
+	
 	""" Creation of the nodes for the weighted abstract graph. They correspond to location-element
 	pairs. The location is in the graph G and the element is in E. """
-    
+	
 	for node in G.nodes():
         	for element in E:
 			invariant = G.node[node]['inv']
@@ -57,7 +58,7 @@ def set_edges_and_weights(WG,G,E):
 			scc_list = list(nx.strongly_connected_component_subgraphs(SG))
 			SCCG = nx.condensation(SG,scc_list)
 			SCCG_nodes = SCCG.nodes()
-    
+			
 			""" Addition of the subgraph part associated to the strongly connected component to a node tag, named 
 			int_graph. """
 			for i in range(len(scc_list)):
