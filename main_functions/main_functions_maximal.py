@@ -1,3 +1,6 @@
+__author__ = "Miriam Garcia Soto"
+__email__ = "miriam.garcia@imdea.org"
+
 import numpy as np
 import files as f
 import partition as par
