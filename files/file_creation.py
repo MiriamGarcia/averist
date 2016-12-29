@@ -1,3 +1,6 @@
+__author__ = "Miriam Garcia Soto"
+__email__ = "miriam.garcia@imdea.org"
+
 import subprocess as sp
 import functions as fun
 
