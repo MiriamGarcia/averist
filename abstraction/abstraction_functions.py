@@ -124,11 +124,10 @@ def subgraph(G,element):
 	""" Determine a subgraph of G related to a particular element. """
 	
 	subgraph_time = time.time()
-    
-	#new_invariants = []
+	
 	new_dyn_list = []
 	nodes_subgraph = []
-    
+	
 	""" Gets the nodes in G such that the element is contained in the invariant and the new flows 
 	are computed. """
 	nodes = G.nodes()
