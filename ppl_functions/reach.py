@@ -1,7 +1,6 @@
 from sage.libs.ppl import *
 import ppl_functions as pplf
 import abstraction as a
-#import Abstraction.graph_functions as gf
 import networkx as nx
 
 
@@ -12,8 +11,8 @@ def reach_ray(initpoly,finalpoly,dyn_ray_list):
 	dynamics as a list of rays.
 	-------------------------------------------------------------------------------------------
 	input:	initpoly		Initial polyhedron		ppl.NNC_Polyhedron
-			finalpoly		Final polyhedron		ppl.NNC_Polyhedron
-			dyn_ray_list	Dynamics				ppl.Generator_System (list of rays)
+		finalpoly		Final polyhedron		ppl.NNC_Polyhedron
+		dyn_ray_list		Dynamics			ppl.Generator_System (list of rays)
 		
 	output:	reachpoly		Reach polyhedron		ppl.NNC_Polyhedron. """
 	
@@ -47,14 +46,14 @@ def reach(initpoly,finalpoly,dyn_poly):
 	""" Obtain a reach polyhedron given three polyhedra, the initial, the final one, and the dynamics.
         -------------------------------------------------------------------------------------------
         input:	initpoly		Initial polyhedron		ppl.NNC_Polyhedron
-				finalpoly		Final polyhedron		ppl.NNC_Polyhedron
-				dyn_ray_list	Dynamics				ppl.NNC_Polyhedron
+		finalpoly		Final polyhedron		ppl.NNC_Polyhedron
+		dyn_ray_list		Dynamics			ppl.NNC_Polyhedron
 		
         output:	reachpoly		Reach polyhedron		ppl.NNC_Polyhedron. """
 	
 	dyn_rays = pplf.poly2rays_v2(dyn_poly,inv_var_dict)
 	reachpoly = reach_ray(initpoly,finalpoly,dyn_rays)
-    
+	
 	return reachpoly
 
 
@@ -95,15 +94,13 @@ def post_reach_loc(exit_loc_list,loc_list,C,SCCG):
 
 #----------------------------------------------------------------------------------------------#
 def pre_reach_loc_v2(loc_list,element,SG):
-    
+	
 	""" Obtains the set of original input locations in the subgraph SG such that there exists 
 	an edge from the original location to one in the location list. """
-#	print 'Edges =',SG.edges()
-#	print 'Nodes =',SG.nodes()
+
 	pre_loc_list = loc_list[:]
 	for loc in loc_list:
 		for nsg in SG.nodes():
-			#if list(a.graph_functions.all_simple_paths(SG,nsg,loc)):
 			if nx.has_path(SG,nsg,loc):
 				pre_loc_list.append(nsg)
 
@@ -116,12 +113,10 @@ def post_reach_loc_v2(loc_list,element,SG):
 	
 	""" Obtains the set of original input locations in the subgraph SG such that there exists
 	an edge from one location in the list to the original location. """
-#	print 'Edges =',SG.edges()
-#	print 'Nodes =',SG.nodes()
+
 	post_loc_list = loc_list[:]
 	for loc in loc_list:
 		for nsg in SG.nodes():
-			#if list(gf.all_simple_paths(SG,loc,nsg)):
 			if nx.has_path(SG,loc,nsg):
 				post_loc_list.append(nsg)
 	
