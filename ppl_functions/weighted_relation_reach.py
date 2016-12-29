@@ -1,7 +1,4 @@
 from sage.libs.ppl import *
-#import ppl_functions as pplf
-#import reach as r
-#import Abstraction.graph_functions as gf
 from fractions import Fraction
 
 
@@ -35,8 +32,7 @@ def interval_weight_poly_rel_restriction(poly_rel,weight,epsilon):
 				resize = weightminus.denominator
 			else:
 				resize = weightminus.denominator * weightplus.denominator
-			print 'resize =',resize
-			#weighted_poly_rel.add_constraint(resize*Variable(j) - int(resize*weight) * Variable(i) == 0)
+				
 			weighted_poly_rel.add_constraint(resize*Variable(j) - int(resize * weightminus) * Variable(i) >= 0)
 			weighted_poly_rel.add_constraint(resize*Variable(j) - int(resize * weightplus) * Variable(i) <= 0)
 			
@@ -48,7 +44,7 @@ def interval_weight_poly_rel_restriction(poly_rel,weight,epsilon):
 			weighted_poly_rel_list.append(weighted_poly_rel)
 
 #	Now, since the union of the polyrel is not a polyhedron, we can construct the convex hull
-#	but maybe is not a good solution
+#	but it could exists a better solution
 
 	weight_poly_rel = NNC_Polyhedron(dim,'empty')
 	for wpr in weighted_poly_rel_list:
@@ -94,7 +90,7 @@ def weight_poly_rel_restriction(poly_rel,weight,epsilon):
 			weighted_poly_rel_list.append(weighted_poly_rel)
 
 #	Now, since the union of the polyrel is not a polyhedron, we can construct the convex hull
-#	but maybe is not a good solution
+#	but it may exist a better solution
 
 	weight_poly_rel = NNC_Polyhedron(dim,'empty')
 	for wpr in weighted_poly_rel_list:
@@ -124,30 +120,19 @@ def weighted_composition_rel(poly_rel1,poly_rel2,weight):
 	elif polyrel2.is_universe():
 		return polyrel1
 	else:
-		#print 'polyrel1 before adding space dimensions =\n	',polyrel1.constraints()
-		#print 'polyrel2 before adding space dimensions =\n	',polyrel2.constraints()
-		#print 'polyrel1 dimension = ', polyrel1.space_dimension()
-		#print 'polyrel2 dimension = ', polyrel2.space_dimension()
 		
 		""" Add space dimensions: P_1(x,y) --> P_1(x,y,z) and P_2(y,z) --> P_2(y,z,x). """
 		polyrel1.add_space_dimensions_and_embed(vardim)
 		polyrel2.add_space_dimensions_and_embed(vardim)
 		
-		#print 'polyrel1 after adding space dimensions =\n	',polyrel1.constraints()
-		#print 'polyrel2 after adding space dimensions =\n	',polyrel2.constraints()
-		
 		""" Swap last multivariable in the second polyhedron, P_2(y,z,x) --> P_2(x,y,z). """
 		polyrel2 = pplf.swap_last_variables(polyrel2)
-		#print 'polyrel2 after swapping last variables =\n	',polyrel2.constraints()
-		
 		polyrel1.intersection_assign(polyrel2)
-		#print 'intersection of polyrel1 and polyrel2)=\n	',polyrel1.constraints()
 		
 		""" Projection on the first and third multivariable. """
 		new_dim = polyrel1.space_dimension()
 		coordlist = range(0,vardim) + range(dvardim,new_dim)
 		polyrel1 = pplf.projection(polyrel1,coordlist)
-		#print 'projection on the first and third multivariable =',polyrel1.constraints()
 
 		""" Restriction to the pair of points with scaling equal to the weight value. """
 		weighted_poly = weight_poly_rel_restriction(polyrel1,weight)
@@ -168,11 +153,11 @@ def weighted_composition_rel(poly_rel1,poly_rel2,weight):
 def weighted_composition_ref(initrelpoly,relpolylist,weight_list):
 	
 	""" Given a list of relation polyhedra we get the final relation polyhedron by composition.
-		In case of getting emptiness, the last non empty composed relation polyhedron is returned.
-		
-		input:	relpolylist		relation polyhedron list						list of ppl.NNC_Polyhedron
-		
-		output:	comppoly		composed relation polyhedron					ppl.NNC_Polyhedron
+	In case of getting emptiness, the last non empty composed relation polyhedron is returned.
+	
+	input:	relpolylist	relation polyhedron list				list of ppl.NNC_Polyhedron
+
+	output:	comppoly	composed relation polyhedron				ppl.NNC_Polyhedron
 		pre_comppoly	last non empty composed relation polyhedron		ppl.NNC_Polyhedron """
 	
 	lenlist = len(relpolylist)
@@ -191,7 +176,6 @@ def weighted_composition_ref(initrelpoly,relpolylist,weight_list):
 			break
 		else:
 			prerelpoly = NNC_Polyhedron(comppoly)
-	#			pre_comppoly = NNC_Polyhedron(comppoly)
 
 	return nodeind,comppoly,prerelpoly
 
