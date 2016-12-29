@@ -4,25 +4,24 @@ import ppl_functions as pplf
 #import matplotlib.pyplot as plt
 
 def var(var_string):
-    
+	
 	variables = var_string.split(',')
 	dim = len(variables)
 	var_dict = {}
 	for i in range(dim):
 		var_dict.update({variables[i]:i})
 
-    
+		
 	# inverse of the dictionary
 	inv_var_dict = dict([(v,k) for (k,v) in var_dict.items()])
-    # inverse of the dictionary for the dynamics
+	# inverse of the dictionary for the dynamics
 	inv_var_dict_dyn = dict([(v,'d'+k) for (k,v) in var_dict.items()])
-
-    
+	
 	return var_dict, inv_var_dict, inv_var_dict_dyn
 
 
 def location(loc_string):
-    
+	
 	locations = loc_string.split(',')
 	G = nx.DiGraph()
 	G.add_nodes_from(locations)
@@ -39,12 +38,12 @@ def inv(G,P,inv_string,node,inv_var_dict):
 	for e in expressions:
 		#P = np.hstack((P,e))
 		P.append(e)
-    
+		
 	return G,P
 
 
 def dyn(G,dyn_string,node,inv_var_dict_dyn,HA_type):
-    
+	
 	if HA_type == 'polyhedral':
 		
 		dyn_poly = pplf.ppl_functions.get_polyhedron(dyn_string,inv_var_dict_dyn)
@@ -65,7 +64,7 @@ def guards(G,P,guard_string,initial_node,inv_var_dict):
 	
 	grd = guard_list[0]
 	final_node = guard_list[2]
-    
+	
 	guard_poly = pplf.ppl_functions.get_polyhedron(grd,inv_var_dict)
 	G.add_edge(initial_node,final_node,guard=guard_poly)
 	
@@ -73,7 +72,7 @@ def guards(G,P,guard_string,initial_node,inv_var_dict):
 	for e in expressions:
 		#P = np.hstack((P,e))
 		P.append(e)
-    
+		
 	return G,P
 
 
@@ -148,7 +147,7 @@ def read_input(namefile,HA_type):
 
 		print
 		return var_dict,inv_var_dict,P,G
-    
+	
 	except IOError:
 		print 'Cannot open input file'
 	except NameError:
