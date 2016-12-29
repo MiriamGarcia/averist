@@ -47,25 +47,25 @@ def _all_simple_paths_graph(G, source, target, cutoff=None):
 
 
 def _all_simple_paths_multigraph(G, source, target, cutoff=None):
-    if cutoff < 1:
-        return
-    visited = [source]
-    stack = [(v for u,v in G.edges(source))]
-    while stack:
-        children = stack[-1]
-        child = next(children, None)
-        if child is None:
-            stack.pop()
-            visited.pop()
-        elif len(visited) < cutoff:
-            if child == target:
-                yield visited + [target]
-            elif child not in visited:
-                visited.append(child)
-                stack.append((v for u,v in G.edges(child)))
-        else: #len(visited) == cutoff:
-            count = ([child]+list(children)).count(target)
-            for i in range(count):
-                yield visited + [target]
-            stack.pop()
-            visited.pop()
+	if cutoff < 1:
+        	return
+	visited = [source]
+	stack = [(v for u,v in G.edges(source))]
+	while stack:
+        	children = stack[-1]
+        	child = next(children, None)
+        	if child is None:
+			stack.pop()
+			visited.pop()
+		elif len(visited) < cutoff:
+			if child == target:
+				yield visited + [target]
+			elif child not in visited:
+				visited.append(child)
+				stack.append((v for u,v in G.edges(child)))
+		else: #len(visited) == cutoff:
+			count = ([child]+list(children)).count(target)
+			for i in range(count):
+				yield visited + [target]
+			stack.pop()
+			visited.pop()
