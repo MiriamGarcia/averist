@@ -1,15 +1,3 @@
-#import numpy as np
-#import File_creation.functions as fun
-#import Partition.create_linear_exp as cle
-#import sys
-#import automaton_transformation as at
-#import automaton_transformation_v2 as at_v2
-#import PPL_functions.ppl_functions as pplf
-#from sage.libs.ppl import *
-#import abstraction as abs
-#import networkx as nx
-#import Refinement.refinement as ref
-
 import numpy as np
 import files as f
 import partition as par
@@ -55,8 +43,8 @@ def initial_LE(P,given_linear_exp,extract_linear_exp,unif_linear_exp,inv_var_dic
 def transformation_unif(G,LE,var_dict,inv_var_dict,namefolder_le):
 	
 	""" Automaton transformation: from linear hybrid automaton to polyhedral hybrid automaton,
-		following the computational explanation in 'An algorithmic approach to stability verification
-		of polyhedral switched systems', ACC 2014 . """
+	following the computational explanation in 'An algorithmic approach to stability verification
+	of polyhedral switched systems', ACC 2014 . """
 	
 	PG,E,creation_time = hyb.automaton_transformation.LHA_to_PHA_maximal_unif(G,LE,var_dict,inv_var_dict,namefolder_le)
 	
@@ -81,8 +69,8 @@ def transformation_norm(G,LE,var_dict,inv_var_dict,namefolder_le,diameter_bound)
 def transformation_norm_v2(G,LE,var_dict,inv_var_dict,namefolder_le,diameter_percentage):
 	
 	""" Automaton transformation: from linear hybrid automaton to polyhedral hybrid automaton,
-		following the computational explanation in 'An algorithmic approach to stability verification
-		of polyhedral switched systems', ACC 2014 . """
+	following the computational explanation in 'An algorithmic approach to stability verification
+	of polyhedral switched systems', ACC 2014 . """
 	
 	PG,E,new_LE,max_diameter,creation_time = hyb.automaton_transformation_v2.LHA_to_PHA_maximal_norm_v2(G,LE,var_dict,inv_var_dict,namefolder_le,diameter_percentage)
 	
@@ -128,7 +116,6 @@ def construct_abstract_graph(PG,LE,E,var_dict,inv_var_dict,namefolder_le,HA_type
 	global scr_line
 	scr_line = ''
 
-	#dim = len(var_dict)
 	
 	output = namefolder_le + '/output'
 	explosion_in_graph = False
