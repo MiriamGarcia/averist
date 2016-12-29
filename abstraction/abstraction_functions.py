@@ -120,7 +120,7 @@ def adjacent_elements_v2(E,element):
 
 #----------------------------------------------------------------------------------------------#
 def subgraph(G,element):
-	#print 'ELEMENT for the subgraph =', element.constraints()
+	
 	""" Determine a subgraph of G related to a particular element. """
 	
 	subgraph_time = time.time()
@@ -138,9 +138,7 @@ def subgraph(G,element):
 		dynamics = G.node[node]['dyn']
 	
 		if invariant.contains(element):
-
-			#new_inv = pplf.ppl_functions.intersection(element,invariant)
-			#new_invariants.append(new_inv)
+			
 			ppoly = pplf.ppl_functions.plane_element(element)
 			new_dyn = pplf.ppl_functions.intersection(ppoly,dynamics)
 			new_dyn_list.append(new_dyn)
@@ -153,7 +151,6 @@ def subgraph(G,element):
 
 	""" Set the new invariants and dynamics. """
 	for i in range(len(nodes_subgraph)):
-		#SG.node[nodes_subgraph[i]]['inv'] = new_invariants[i]
 		SG.node[nodes_subgraph[i]]['inv'] = element
 		SG.node[nodes_subgraph[i]]['dyn'] = new_dyn_list[i]
 	
@@ -166,9 +163,6 @@ def subgraph(G,element):
 		
 		guard = G[prenode][postnode]['guard']
 		
-		#if guard.contains(element) == False:
-			#SG.remove_edge(edge[0],edge[1])
-		#print 'guard =',guard
 		if guard.contains(element):
 			SG[prenode][postnode]['guard'] = element
 	
