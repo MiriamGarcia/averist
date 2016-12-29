@@ -1,7 +1,7 @@
 import networkx as nx
 import numpy as np
-#import matplotlib.pyplot as plt
 import ppl_functions as pplf
+#import matplotlib.pyplot as plt
 
 def var(var_string):
     
