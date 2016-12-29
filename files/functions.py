@@ -13,15 +13,15 @@ def str2file(string,namefile):
 
 #----------------------------------------------------------------------------------------------#
 def list2file(l,namefile):
-    
-    """ Write a list into a file. """
-    
-    f = open(namefile,'w')
 	
-    for i in l:
-        f.write(str(i)+'\n')
-    
-    f.close()
+	""" Write a list into a file. """
+	
+	f = open(namefile,'w')
+	
+	for i in l:
+		f.write(str(i)+'\n')
+		
+	f.close()
 
 
 #----------------------------------------------------------------------------------------------#
@@ -33,7 +33,7 @@ def load(namefile):
 	with open(namefile) as f:
 		for line in f:
 			A.append(line.strip())
-    
+			
 	return A
 
 
@@ -85,7 +85,6 @@ def transform_P(P):
 
 #----------------------------------------------------------------------------------------------#
 def initialize_time():
-
- return 0., 0., 0., 0., 0., 0., 0., 0.
+	return 0., 0., 0., 0., 0., 0., 0., 0.
 
 
