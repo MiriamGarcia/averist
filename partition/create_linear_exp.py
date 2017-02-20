@@ -1,3 +1,7 @@
+__author__ = "Miriam Garcia Soto"
+__email__ = "miriam.garcia@imdea.org"
+
+
 from fractions import gcd
 from sage.libs.ppl import Linear_Expression
 
